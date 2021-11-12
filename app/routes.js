@@ -1,9 +1,9 @@
-// const controller = require('./controllers/controller');
 const { healthCheck } = require('./controllers/healthCheck');
+const users = require('./controllers/users');
+const { validateRequest, checkEmailExists } = require('./middlewares/validateRequest');
+const { signup } = require('./schemas/user');
 
 exports.init = app => {
   app.get('/health', healthCheck);
-  // app.get('/endpoint/get/path', [], controller.methodGET);
-  // app.put('/endpoint/put/path', [], controller.methodPUT);
-  // app.post('/endpoint/post/path', [], controller.methodPOST);
+  app.post('/users', [validateRequest(signup), checkEmailExists], users.signup);
 };
