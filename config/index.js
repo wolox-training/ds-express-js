@@ -46,7 +46,7 @@ const config = {
       nodeVersion: process.env.NODE_VERSION || 'X-Node-Version'
     },
     weet: {
-      url: 'http://numbersapi.com'
+      url: process.env.WEET_API_URL
     }
   }
 };
