@@ -1,4 +1,5 @@
 const bcrypt = require('bcrypt');
+const logger = require('../logger');
 const { databaseError } = require('../errors');
 const { users: User } = require('../models');
 
@@ -8,7 +9,8 @@ exports.signup = async user => {
     const { dataValues } = await User.create({ ...user, password });
     return dataValues;
   } catch (error) {
-    throw databaseError(error);
+    logger.error(error.message);
+    throw databaseError('Error creating user in db');
   }
 };
 
@@ -17,6 +19,7 @@ exports.findUserByEmail = async email => {
     const user = await User.findOne({ where: { email } });
     return user;
   } catch (error) {
-    throw databaseError(error);
+    logger.error(error.message);
+    throw databaseError('Error searching user in db');
   }
 };

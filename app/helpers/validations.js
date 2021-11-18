@@ -1,9 +1,11 @@
 const Ajv = require('ajv');
 const addFormats = require('ajv-formats');
+const addErrors = require('ajv-errors');
 const { error } = require('../logger');
 
-const ajv = new Ajv();
+const ajv = new Ajv({ allErrors: true });
 addFormats(ajv);
+addErrors(ajv);
 
 exports.validateSchema = (schema, data) => {
   const validate = ajv.compile(schema);
