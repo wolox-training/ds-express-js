@@ -47,6 +47,9 @@ const config = {
     },
     weet: {
       url: process.env.WEET_API_URL
+    },
+    bcrypt: {
+      salt: process.env.BCRYPT_SALT
     }
   }
 };

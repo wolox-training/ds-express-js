@@ -1,6 +1,6 @@
 const { email, password } = require('../constants/schemas');
 
-exports.signup = {
+exports.signupSchema = {
   type: 'object',
   properties: {
     name: {
