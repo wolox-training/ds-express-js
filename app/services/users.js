@@ -1,12 +1,10 @@
-const bcrypt = require('bcrypt');
 const logger = require('../logger');
 const { databaseError } = require('../errors');
 const { users: User } = require('../models');
 
 exports.signup = async user => {
   try {
-    const password = await bcrypt.hash(user.password, 10);
-    const { dataValues } = await User.create({ ...user, password });
+    const { dataValues } = await User.create(user);
     return dataValues;
   } catch (error) {
     logger.error(error.message);

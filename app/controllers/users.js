@@ -1,15 +1,18 @@
 const { signup } = require('../services/users');
 const { info, error } = require('../logger');
 const { signup: response } = require('../serializers/users');
-const { signup: userInfo } = require('../mappers/users');
+const { signup: signupMapper } = require('../mappers/users');
+const auth = require('../helpers/authentication');
 
-exports.signup = async (req, res) => {
+exports.signup = async (req, res, next) => {
   try {
-    const user = await signup(userInfo(req.body));
+    const password = await auth.hash(req.body.password);
+    const userData = signupMapper({ ...req.body, password });
+    const user = await signup(userData);
     info(`User ${user.name} was created`);
     res.status(201).send(response(user));
   } catch (err) {
     error('Error creating user');
-    res.status(400).send(err);
+    next(err);
   }
 };
