@@ -1,3 +1,5 @@
+const { email, password } = require('../constants/schemas');
+
 exports.signup = {
   type: 'object',
   properties: {
@@ -9,16 +11,8 @@ exports.signup = {
       type: 'string',
       minLength: 1
     },
-    email: {
-      type: 'string',
-      format: 'email',
-      pattern: '@wolox.(com(.ar|.co|.cl|)|ar|co|cl)$'
-    },
-    password: {
-      type: 'string',
-      pattern: '^\\w+$',
-      minLength: 8
-    }
+    email,
+    password
   },
   required: ['name', 'last_name', 'email', 'password'],
   additionalProperties: false

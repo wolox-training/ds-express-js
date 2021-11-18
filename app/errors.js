@@ -1,12 +1,7 @@
-const { error } = require('./logger');
-
-const internalError = (message, internalCode) => {
-  error(internalCode, message);
-  return {
-    message,
-    internalCode
-  };
-};
+const internalError = (message, internalCode) => ({
+  message,
+  internalCode
+});
 
 exports.DATABASE_ERROR = 'database_error';
 exports.databaseError = message => internalError(message, exports.DATABASE_ERROR);
