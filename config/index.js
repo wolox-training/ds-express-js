@@ -50,6 +50,10 @@ const config = {
     },
     bcrypt: {
       salt: process.env.BCRYPT_SALT
+    },
+    jwt: {
+      privateKey: process.env.JWT_PRIVATE_KEY,
+      expiresIn: process.env.JWT_PRIVATE_KEY
     }
   }
 };
