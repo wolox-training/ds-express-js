@@ -1,14 +1,8 @@
 const request = require('supertest');
 const app = require('../../app');
+const { user } = require('../factory/factory_users');
 
 describe('Sign up: POST /users', () => {
-  const user = {
-    name: 'David',
-    last_name: 'Sandoval',
-    email: 'david@wolox.com.co',
-    password: 'ABC12345678'
-  };
-
   test('User sign up successfully', async () => {
     const { statusCode } = await request(app)
       .post('/users')

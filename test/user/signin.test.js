@@ -1,23 +1,11 @@
 const request = require('supertest');
 const app = require('../../app');
 const { AUTHENTICATION_ERROR } = require('../../app/errors');
+const { credentials, generateUsers } = require('../factory/factory_users');
 
 describe('Sign in: POST /users/sessions', () => {
-  const credentials = {
-    email: 'david@wolox.com.co',
-    password: 'ABC12345678'
-  };
-
-  const user = {
-    name: 'David',
-    last_name: 'Sandoval',
-    ...credentials
-  };
-
   beforeEach(async () => {
-    await request(app)
-      .post('/users')
-      .send(user);
+    await generateUsers(1);
   });
 
   test('it should sign in successfully', async () => {
