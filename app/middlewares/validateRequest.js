@@ -1,3 +1,4 @@
+const { PARAMETER_TYPE } = require('../constants/schemas');
 const { requestError, invalidUser } = require('../errors');
 const { validateSchema } = require('../helpers/validations');
 const { findUserByEmail } = require('../services/users');
@@ -8,8 +9,8 @@ const validateRequest = (schema, requestType) => (req, _, next) => {
   return next();
 };
 
-exports.validateBody = schema => validateRequest(schema, 'body');
-exports.validateQuery = schema => validateRequest(schema, 'query');
+exports.validateBody = schema => validateRequest(schema, PARAMETER_TYPE.BODY);
+exports.validateQuery = schema => validateRequest(schema, PARAMETER_TYPE.QUERY);
 
 exports.checkEmailExists = async (req, res, next) => {
   try {
