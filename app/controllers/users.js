@@ -1,11 +1,11 @@
 const { signup, findUserByEmail, getUsers } = require('../services/users');
 const { info, error } = require('../logger');
-const { userSerializer } = require('../serializers/users');
+const { userSerializer, listUsers } = require('../serializers/users');
 const { signup: signupMapper } = require('../mappers/users');
 const auth = require('../helpers/authentication');
 const { authenticationError } = require('../errors');
 const { AUTH_ERROR } = require('../constants/errors').responses;
-const { paginationData, paginationReq } = require('../helpers/pagination');
+const { paginationReq } = require('../helpers/pagination');
 
 exports.signup = async (req, res, next) => {
   try {
@@ -43,10 +43,7 @@ exports.getUsers = async (req, res, next) => {
   try {
     const { page, limit, offset } = paginationReq(req.query);
     const { users, count } = await getUsers(offset, limit);
-
-    const userList = users.map(user => userSerializer(user));
-    const pagination = paginationData({ total: count, page, limit });
-    res.status(200).send({ users: userList, pagination });
+    res.status(200).send(listUsers({ total: count, page, limit, users }));
   } catch (err) {
     error('Error getting list users');
     next(err);
