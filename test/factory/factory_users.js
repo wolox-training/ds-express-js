@@ -25,3 +25,7 @@ exports.generateUsers = async number => {
     password
   });
 };
+
+exports.generateUser = async () => {
+  await this.generateUsers(1);
+};
