@@ -21,3 +21,17 @@ exports.findUserByEmail = async email => {
     throw databaseError('Error searching user in db');
   }
 };
+
+exports.getUsers = async (offset, limit) => {
+  try {
+    const { rows, count } = await User.findAndCountAll({
+      attributes: { exclude: ['password'] },
+      limit,
+      offset
+    });
+    return { users: rows, count };
+  } catch (error) {
+    logger.error(error.message);
+    throw databaseError('Error getting users in db');
+  }
+};

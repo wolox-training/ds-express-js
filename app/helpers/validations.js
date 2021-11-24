@@ -3,7 +3,7 @@ const addFormats = require('ajv-formats');
 const addErrors = require('ajv-errors');
 const { error } = require('../logger');
 
-const ajv = new Ajv({ allErrors: true });
+const ajv = new Ajv({ allErrors: true, coerceTypes: true });
 addFormats(ajv);
 addErrors(ajv);
 

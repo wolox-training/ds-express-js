@@ -14,3 +14,8 @@ exports.password = {
   pattern: '^\\w+$',
   minLength: 8
 };
+
+exports.PARAMETER_TYPE = {
+  QUERY: 'query',
+  BODY: 'body'
+};
