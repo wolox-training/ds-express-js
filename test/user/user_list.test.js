@@ -1,7 +1,7 @@
 const request = require('supertest');
 const app = require('../../app');
 const { NUMBER_USERS } = require('../constants');
-const { TOKEN_NOT_PROVIDED } = require('../../app/constants/errors').responses;
+const { TOKEN_NOT_PROVIDED } = require('../../app/constants/errors');
 const { AUTHENTICATION_ERROR } = require('../../app/errors');
 const { generateUsers, credentials } = require('../factory/factory_users');
 

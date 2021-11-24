@@ -17,3 +17,6 @@ exports.invalidUser = message => internalError(message, exports.REQUEST_ERROR);
 
 exports.AUTHENTICATION_ERROR = 'authentication_error';
 exports.authenticationError = message => internalError(message, exports.AUTHENTICATION_ERROR);
+
+exports.UNAUTHORIZED_ERROR = 'unauthorized_error';
+exports.unauthorizedError = message => internalError(message, exports.UNAUTHORIZED_ERROR);

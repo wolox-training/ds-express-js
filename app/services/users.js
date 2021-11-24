@@ -2,13 +2,24 @@ const logger = require('../logger');
 const { databaseError } = require('../errors');
 const { users: User } = require('../models');
 
-exports.signup = async user => {
+exports.createUser = async user => {
   try {
     const { dataValues } = await User.create(user);
     return dataValues;
   } catch (error) {
     logger.error(error.message);
     throw databaseError('Error creating user in db');
+  }
+};
+
+exports.updateUser = async (user, fields) => {
+  try {
+    const [, users] = await User.update(user, { where: fields, returning: true });
+    const { dataValues } = users[0];
+    return dataValues;
+  } catch (error) {
+    logger.error(error.message);
+    throw databaseError('Error updating user in db');
   }
 };
 
