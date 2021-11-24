@@ -17,3 +17,13 @@ exports.signupSchema = {
   required: ['name', 'last_name', 'email', 'password'],
   additionalProperties: false
 };
+
+exports.signinSchema = {
+  type: 'object',
+  properties: {
+    email,
+    password
+  },
+  required: ['email', 'password'],
+  additionalProperties: false
+};

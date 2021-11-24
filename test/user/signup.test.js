@@ -34,7 +34,7 @@ describe('Sign up: POST /users', () => {
       .send(userData);
     expect(statusCode).toEqual(400);
     expect(body.message[0].instancePath).toEqual('/email');
-    expect(body.message[0].keyword).toEqual('pattern');
+    expect(body.message[0].keyword).toEqual('errorMessage');
   });
 
   test('Validate password', async () => {

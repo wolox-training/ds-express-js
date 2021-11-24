@@ -14,3 +14,6 @@ exports.requestError = message => internalError(message, exports.REQUEST_ERROR);
 
 exports.REQUEST_ERROR = 'invalid_user';
 exports.invalidUser = message => internalError(message, exports.REQUEST_ERROR);
+
+exports.AUTHENTICATION_ERROR = 'authentication_error';
+exports.authenticationError = message => internalError(message, exports.AUTHENTICATION_ERROR);
