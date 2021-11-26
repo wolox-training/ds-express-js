@@ -3,7 +3,7 @@ const app = require('../../app');
 const { CREDENTIALS, generateUser } = require('../factory/factory_users');
 const { AUTH_ERROR } = require('../../app/constants/errors');
 const { AUTHENTICATION_ERROR, DATABASE_ERROR } = require('../../app/errors');
-const { users: User } = require('../../app/models');
+const { User } = require('../../app/models');
 const db = require('../../app/models');
 
 const { ADMIN_USER } = CREDENTIALS;

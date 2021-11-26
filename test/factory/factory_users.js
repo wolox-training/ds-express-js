@@ -16,7 +16,7 @@ exports.generateUsers = async number => {
   factory.resetSeq();
   const { email } = this.USER;
   const password = await hash(PASSWORD);
-  factory.createMany('users', number, {
+  factory.createMany('User', number, {
     ...this.USER,
     lastName: this.USER.last_name,
     email: factory.seq('User.email', pos => (pos === 1 ? email : pos + email)),
