@@ -5,6 +5,7 @@ const { weetMapper } = require('../mappers/weets');
 const { defaultError } = require('../errors');
 const { CHARACTER_LIMIT } = require('../constants/weets');
 const { CHARACTER_LIMIT_ERROR } = require('../constants/errors');
+const { weetSerializer } = require('../serializers/weets');
 
 exports.createWeet = async (req, res, next) => {
   try {
@@ -14,7 +15,7 @@ exports.createWeet = async (req, res, next) => {
 
     const weet = await createWeet(weetMapper(userId, weetContent));
     logger.info('Weet was created successfully');
-    res.status(201).send(weet);
+    res.status(201).send(weetSerializer(weet));
   } catch (error) {
     logger.error('Error creating weet');
     next(error);
