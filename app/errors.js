@@ -20,3 +20,6 @@ exports.authenticationError = message => internalError(message, exports.AUTHENTI
 
 exports.UNAUTHORIZED_ERROR = 'unauthorized_error';
 exports.unauthorizedError = message => internalError(message, exports.UNAUTHORIZED_ERROR);
+
+exports.UNAVAILABLE_ERROR = 'service_unavailable_error';
+exports.unavailableError = message => internalError(message, exports.UNAVAILABLE_ERROR);

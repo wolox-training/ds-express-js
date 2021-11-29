@@ -1,0 +1,1 @@
+exports.CHARACTER_LIMIT = 140;
