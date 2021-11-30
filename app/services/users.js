@@ -1,6 +1,6 @@
 const logger = require('../logger');
 const { databaseError } = require('../errors');
-const { users: User } = require('../models');
+const { User } = require('../models');
 
 exports.createUser = async user => {
   try {

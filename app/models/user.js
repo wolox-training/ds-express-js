@@ -2,7 +2,7 @@ const ROLES = require('../constants/roles');
 
 module.exports = (sequelize, DataTypes) => {
   const User = sequelize.define(
-    'users',
+    'User',
     {
       id: {
         type: DataTypes.INTEGER,
@@ -37,5 +37,9 @@ module.exports = (sequelize, DataTypes) => {
       underscored: true
     }
   );
+
+  User.associate = ({ Weet }) => {
+    User.hasMany(Weet, { as: 'weets' });
+  };
   return User;
 };
