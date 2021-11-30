@@ -19,5 +19,6 @@ exports.init = app => {
     users.signupAdmin
   );
 
+  app.get('/weets', [validateToken, validateQuery(paginationSchema)], weets.getWeets);
   app.post('/weets', [validateToken], weets.createWeet);
 };
