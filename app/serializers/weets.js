@@ -7,6 +7,6 @@ exports.weetSerializer = weet => ({
 });
 
 exports.listWeets = ({ total, page, limit, weets }) => {
-  const users = weets.map(weet => this.weetSerializer(weet));
-  return pageSerializer({ users }, { total, page, limit });
+  const weetList = weets.map(weet => this.weetSerializer(weet));
+  return pageSerializer({ weets: weetList }, { total, page, limit });
 };
