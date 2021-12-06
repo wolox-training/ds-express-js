@@ -1,9 +1,9 @@
 const { factory } = require('factory-girl');
 const { ADMIN, REGULAR } = require('../../app/constants/roles');
 const { hash } = require('../../app/helpers/authentication');
-const { factoryAllModels } = require('./factory_by_models');
+const { factoryByModel } = require('./factory_by_models');
 
-factoryAllModels();
+factoryByModel('User');
 
 const PASSWORD = 'ABC12345678';
 const ADMIN_USER = { email: 'david@wolox.com.co', password: PASSWORD };
