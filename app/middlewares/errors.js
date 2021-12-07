@@ -5,6 +5,7 @@ const DEFAULT_STATUS_CODE = 500;
 
 const statusCodes = {
   [errors.DATABASE_ERROR]: 503,
+  [errors.UNAVAILABLE_ERROR]: 503,
   [errors.DEFAULT_ERROR]: 500,
   [errors.REQUEST_ERROR]: 400,
   [errors.AUTHENTICATION_ERROR]: 401,

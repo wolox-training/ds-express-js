@@ -1,5 +1,6 @@
 const { healthCheck } = require('./controllers/healthCheck');
 const users = require('./controllers/users');
+const weets = require('./controllers/weets');
 const { ADMIN } = require('./constants/roles');
 const { validateToken, validateRole } = require('./middlewares/auth');
 const { validateBody, validateQuery, checkEmailExists } = require('./middlewares/validateRequest');
@@ -17,4 +18,6 @@ exports.init = app => {
     [validateBody(signupSchema), validateToken, validateRole(ADMIN)],
     users.signupAdmin
   );
+
+  app.post('/weets', [validateToken], weets.createWeet);
 };
