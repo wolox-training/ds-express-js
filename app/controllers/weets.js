@@ -1,9 +1,9 @@
 const logger = require('../logger');
 const { getWeet, getWeets, createWeet } = require('../services/weets');
-const { getRandomInt, MIN, MAX } = require('../helpers/number');
+const { getRandomInt } = require('../helpers/number');
 const { weetMapper } = require('../mappers/weets');
 const { defaultError } = require('../errors');
-const { CHARACTER_LIMIT } = require('../constants/weets');
+const { CHARACTER_LIMIT, MIN, MAX } = require('../constants/weets');
 const { CHARACTER_LIMIT_ERROR } = require('../constants/errors');
 const { weetSerializer, listWeets } = require('../serializers/weets');
 const { paginationReq } = require('../helpers/pagination');
