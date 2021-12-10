@@ -1,4 +1,6 @@
 const ROLES = require('../constants/roles');
+const { POSITIONS } = require('../constants/users');
+const { getPosition } = require('../helpers/user');
 
 module.exports = (sequelize, DataTypes) => {
   const User = sequelize.define(
@@ -27,6 +29,16 @@ module.exports = (sequelize, DataTypes) => {
         values: Object.values(ROLES),
         defaultValue: ROLES.REGULAR
       },
+      score: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        defaultValue: 0
+      },
+      position: {
+        type: DataTypes.ENUM,
+        values: Object.values(POSITIONS),
+        defaultValue: POSITIONS.DEVELOPER
+      },
       password: {
         type: DataTypes.STRING,
         allowNull: false
@@ -34,7 +46,12 @@ module.exports = (sequelize, DataTypes) => {
     },
     {
       timestamps: true,
-      underscored: true
+      underscored: true,
+      hooks: {
+        beforeUpdate: user => {
+          user.position = getPosition(user.score);
+        }
+      }
     }
   );
 
