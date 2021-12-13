@@ -6,17 +6,27 @@ module.exports = {
   up: async (queryInterface, Sequelize) => {
     const transaction = await queryInterface.sequelize.transaction();
     try {
-      await queryInterface.addColumn('users', 'score', {
-        type: Sequelize.INTEGER,
-        allowNull: false,
-        defaultValue: 0
-      });
-      await queryInterface.addColumn('users', 'position', {
-        type: Sequelize.ENUM,
-        values: Object.values(POSITIONS),
-        defaultValue: POSITIONS.DEVELOPER,
-        allowNull: false
-      });
+      await queryInterface.addColumn(
+        'users',
+        'score',
+        {
+          type: Sequelize.INTEGER,
+          allowNull: false,
+          defaultValue: 0
+        },
+        { transaction }
+      );
+      await queryInterface.addColumn(
+        'users',
+        'position',
+        {
+          type: Sequelize.ENUM,
+          values: Object.values(POSITIONS),
+          defaultValue: POSITIONS.DEVELOPER,
+          allowNull: false
+        },
+        { transaction }
+      );
       await transaction.commit();
     } catch (error) {
       await transaction.rollback();
@@ -26,8 +36,8 @@ module.exports = {
   down: async queryInterface => {
     const transaction = await queryInterface.sequelize.transaction();
     try {
-      await queryInterface.removeColumn('users', 'score');
-      await queryInterface.removeColumn('users', 'position');
+      await queryInterface.removeColumn('users', 'score', { transaction });
+      await queryInterface.removeColumn('users', 'position', { transaction });
       await transaction.commit();
     } catch (error) {
       await transaction.rollback();
