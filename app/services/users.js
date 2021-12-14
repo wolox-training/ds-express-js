@@ -14,7 +14,7 @@ exports.createUser = async user => {
 
 exports.updateUser = async (user, fields) => {
   try {
-    const [, users] = await User.update(user, { where: fields, returning: true });
+    const [, users] = await User.update(user, { where: fields, returning: true, individualHooks: true });
     const { dataValues } = users[0];
     return dataValues;
   } catch (error) {
