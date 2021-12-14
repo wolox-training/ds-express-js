@@ -1,12 +1,13 @@
 const logger = require('../logger');
-const { getWeet, getWeets, createWeet } = require('../services/weets');
+const { getWeet, getWeets, createWeet, findWeet } = require('../services/weets');
 const { getRandomInt } = require('../helpers/number');
-const { weetMapper } = require('../mappers/weets');
-const { defaultError } = require('../errors');
+const { weetMapper, ratingMapper } = require('../mappers/weets');
+const { defaultError, requestError } = require('../errors');
 const { CHARACTER_LIMIT, MIN, MAX } = require('../constants/weets');
-const { CHARACTER_LIMIT_ERROR } = require('../constants/errors');
+const { CHARACTER_LIMIT_ERROR, WEET_NOT_FOUND } = require('../constants/errors');
 const { weetSerializer, listWeets } = require('../serializers/weets');
 const { paginationReq } = require('../helpers/pagination');
+const { rateWeet } = require('../services/ratings');
 
 exports.createWeet = async (req, res, next) => {
   try {
@@ -28,6 +29,20 @@ exports.getWeets = async (req, res, next) => {
     const { page, limit, offset } = paginationReq(req.query);
     const { weets, count } = await getWeets(offset, limit);
     res.status(200).send(listWeets({ total: count, page, limit, weets }));
+  } catch (error) {
+    logger.error(error.message);
+    next(error);
+  }
+};
+
+exports.rateWeet = async (req, res, next) => {
+  try {
+    const rating = ratingMapper(req.payload.id, req.params.id, req.body.score);
+    const weet = await findWeet({ id: req.params.id });
+    if (!weet) throw requestError(WEET_NOT_FOUND);
+
+    const ratingDB = await rateWeet(rating, weet.userId);
+    res.status(201).send(ratingDB);
   } catch (error) {
     logger.error(error.message);
     next(error);

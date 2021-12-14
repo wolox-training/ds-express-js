@@ -2,7 +2,7 @@ const axios = require('axios');
 const logger = require('../logger');
 const { Weet } = require('../models');
 const { url } = require('../../config').common.weet;
-const { GET_WEET_ERROR, GET_WEET_DB_ERROR } = require('../constants/errors');
+const { GET_WEET_ERROR, GET_WEET_DB_ERROR, ERROR_SEARCHING_TWEET } = require('../constants/errors');
 const { databaseError, unavailableError } = require('../errors');
 
 exports.getWeet = async (number, type = '') => {
@@ -12,6 +12,16 @@ exports.getWeet = async (number, type = '') => {
   } catch (error) {
     logger.error(error);
     throw unavailableError(GET_WEET_ERROR);
+  }
+};
+
+exports.findWeet = async params => {
+  try {
+    const weet = await Weet.findOne({ where: params });
+    return weet && weet.dataValues;
+  } catch (error) {
+    logger.error(error.message);
+    throw databaseError(ERROR_SEARCHING_TWEET);
   }
 };
 

@@ -17,5 +17,6 @@ exports.password = {
 
 exports.PARAMETER_TYPE = {
   QUERY: 'query',
-  BODY: 'body'
+  BODY: 'body',
+  PARAMS: 'params'
 };
