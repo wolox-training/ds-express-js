@@ -16,6 +16,7 @@ exports.init = app => {
   app.get('/users', [validateToken, validateRequest(paginationSchema, QUERY)], users.getUsers);
   app.post('/users', [validateRequest(signupSchema, BODY), checkEmailExists], users.signup);
   app.post('/users/sessions', [validateRequest(signinSchema, BODY)], users.signin);
+  app.post('/users/sessions/invalidate_all', [validateToken], users.logout);
 
   app.post(
     '/admin/users',

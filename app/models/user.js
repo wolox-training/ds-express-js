@@ -42,6 +42,11 @@ module.exports = (sequelize, DataTypes) => {
       password: {
         type: DataTypes.STRING,
         allowNull: false
+      },
+      minToken: {
+        type: DataTypes.DATE,
+        defaultValue: Date.now(),
+        allowNull: false
       }
     },
     {

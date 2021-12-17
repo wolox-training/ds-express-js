@@ -56,6 +56,16 @@ exports.signin = async (req, res, next) => {
   }
 };
 
+exports.logout = async (req, res, next) => {
+  try {
+    await updateUser({ minToken: Date.now() }, { id: req.payload.id });
+    res.status(200).send('Logged out successfully');
+  } catch (err) {
+    error('Logout error');
+    next(err);
+  }
+};
+
 exports.getUsers = async (req, res, next) => {
   try {
     const { page, limit, offset } = paginationReq(req.query);
